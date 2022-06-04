@@ -89,13 +89,15 @@ app_license = "MIT"
 # ---------------
 # Hook on document methods and events
 
-# doc_events = {
-# 	"*": {
-# 		"on_update": "method",
-# 		"on_cancel": "method",
-# 		"on_trash": "method"
-#	}
-# }
+doc_events = {
+	"Item": {
+		"validate":[
+					"assignment_test.doc_events.item.set_custom_fields_values",
+					"assignment_test.doc_events.item.set_conversion_factor",
+				],
+		
+	}
+}
 
 # Scheduled Tasks
 # ---------------
@@ -173,3 +175,27 @@ user_data_fields = [
 # 	"assignment_test.auth.validate"
 # ]
 
+fixtures  = [
+		{
+			"dt":"Custom Field",
+			"filters":{"name":["in",
+								[
+								"Item-yield",
+								"Item-height",
+								"Item-width",
+								"Item-length",
+								"UOM Conversion Detail-formula"
+								]
+					]}
+		},
+		{
+			"dt":"Item Attribute",
+			"filters":{"name":["in",[
+									"Width",
+									"Height",
+									"Yield"
+								]
+			]}
+		}
+		
+]
